@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>SmartCold 🥩🥦🐟 – Advanced Sensor Monitoring for Food Storage</title>
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #1B1F3B, #252B48, #1A2130);
+            margin: 0;
+            padding: 40px;
+            color: #fff;
+        }
+
+        h1 {
+            text-align: center;
+            color: #fff;
+            font-size: 2.8em;
+            font-weight: 700;
+            margin-bottom: 35px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            text-shadow: 0px 0px 20px rgba(255,255,255,0.3);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.07);
+            padding: 25px;
+            border-radius: 18px;
+            text-align: center;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 45px rgba(0,0,0,0.55);
+        }
+
+        .label {
+            font-size: 1.4em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #FFD369;
+        }
+
+        .val {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+
+        .ok { color: #2ecc71; }
+        .alert { color: #e74c3c; }
+
+        .info {
+            font-size: 1.2em;
+            margin-top: 10px;
+            color: #D7D7D7;
+        }
+
+        small {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.9em;
+            opacity: 0.7;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.9em;
+            opacity: 0.6;
+            color: #FFD369;
+        }
+    </style>
+
+    <meta http-equiv="refresh" content="5">
+</head>
+
+<body>
+
+    <h1>SmartCold 🥩🥦🐟 – Advanced Sensor Monitoring for Food Storage</h1>
+
+    <div class="grid">
+
+        {% set names = [
+            '🥩 Red Meat Storage',
+            '🍗 White Meat Storage',
+            '🐟 Fish Storage',
+            '🥦 Vegetable Storage',
+            '🧼 Clean Room Storage',
+            '📦 General Warehouse'
+        ] %}
+
+        {% for capteur in capteurs %}
+            <div class="card">
+
+                <div class="label">{{ names[loop.index0] }}</div>
+
+                <div class="val {{ 'alert' if capteur.temperature > 30 else 'ok' }}">
+                    {{ capteur.temperature }}°C
+                </div>
+
+                <div class="info">
+                    Humidité : {{ capteur.humidite }}%
+                </div>
+
+                <small>{{ capteur.timestamp }}</small>
+
+            </div>
+        {% endfor %}
+
+    </div>
+
+    <div class="footer">
+        Designed and Created by Abderrahmane Aref
+    </div>
+
+</body>
+</html>
